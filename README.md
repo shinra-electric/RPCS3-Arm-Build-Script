@@ -15,6 +15,7 @@ This script will compile an Arm64 build of the PlayStation 3 Emulator RPCS3 for 
 > - Odin Sphere Leifthrasir
 > - Ryu Ga Gotoku 1 & 2 HD Remaster (Released in Japan only)
 > - Ratchet & Clank 1-2-3 HD Remasters (Slowdowns, broken cutscenes)<br>
+>
 > If you find another game that works, please mention it and I'll add to the list.
 
 ## Running the script
@@ -39,11 +40,11 @@ It will perform the following actions:
 ## Setting up the emulator
 
 The fast LLVM recompiler currently does not work, so the slower interpreter must be used.<br>
-In order to run games make these changes in the CPU settings: 
+In the `CPU` tab in the settings: 
 - Change the PPU Decoder to Interpreter (static)
 - Change the SPU Decoder to Interpreter (dynamic)
 
-When trying to run a game, always look up the RPCS3 Compatibility list to check the recommended settings. Settings can be saved on a per-game basis.
+Before trying to run a game, always look up the [RPCS3 Compatibility list](https://rpcs3.net/compatibility) to check the recommended settings. Settings can be saved on a per-game basis by right-clicking a game and creating a new custom configuration from global settings.
 
 > [!Note]
 > When trying to play the Ratchet & Clank 1-3 series, in the Settings `Advanced` tab the `Disable MSL Fast Math` option should be selected to prevent graphical corruption. <br>This is not mentioned on the compatibility page.
