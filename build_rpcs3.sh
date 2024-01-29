@@ -72,11 +72,17 @@ export VK_ICD_FILENAMES=$VULKAN_SDK/share/vulkan/icd.d/MoltenVK_icd.json
 export LLVM_DIR=$(brew --prefix)/opt/llvm@17
 
 # Update Repository
-git clone https://github.com/shinra-electric/rpcs3
+git clone https://github.com/RPCS3/rpcs3
 cd rpcs3
-git remote add upstream https://github.com/RPCS3/rpcs3
-git pull upstream master
-git rebase origin/macos-fix
+
+# Suppress old-style-cast warnings
+sed -i '' '1i\'$'\n''#if defined(__clang__)'$'\n' ./darwin/util/sysinfo_darwin.mm
+sed -i '' '2i\'$'\n''#pragma clang diagnostic ignored "-Wold-style-cast"'$'\n' ./darwin/util/sysinfo_darwin.mm
+sed -i '' '3i\'$'\n''#endif'$'\n' ./darwin/util/sysinfo_darwin.mm
+
+sed -i '' '7i\'$'\n''#if defined(__clang__)'$'\n' ./rpcs3/display_sleep_control.cpp
+sed -i '' '8i\'$'\n''#pragma clang diagnostic ignored "-Wold-style-cast"'$'\n' ./rpcs3/display_sleep_control.cpp
+sed -i '' '9i\'$'\n''#endif'$'\n' ./rpcs3/display_sleep_control.cpp
 
 # Update only the submodules that are needed
 git submodule update --init ./3rdparty/asmjit
