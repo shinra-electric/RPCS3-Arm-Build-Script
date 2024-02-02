@@ -20,9 +20,13 @@ This script will compile an Arm64 build of the PlayStation 3 Emulator RPCS3 for 
 
 ## Running the script
 
-When downloaded, it's likely you won't be able to run the script at first.<br> In Terminal, navigate to where the script is and use the command `chmod +x build_rpcs3.sh` to give it execution permissions. <br>
+When downloaded, you probably won't be able to run the script at first.<br>
 
-You may also want to change the default application that is used to open the script to Terminal. Do this by selecting the script and using `command+I` to open the `Get Info` window (or right-click and select from the context menu). Under the `Open With:` section, if Terminal is not selected choose `Other`, enable `All Applications` and navigate to `Applications/Utilities/Terminal`.
+- If you get a message saying that the script can't be opened, right-click on it and select `Open` from the context menu. You should now get a new option to `Open Anyway`.<br>
+
+- The default application that is used to open the script might be set to a text editor. Change the default application by selecting the script and using `Command+I` to open the `Get Info` window (or right-click and select from the context menu). Under the `Open With:` section, if Terminal is not selected choose `Other`, enable `All Applications` and navigate to `/Applications/Utilities/Terminal`.<br>
+
+The script should now open by double-clicking it. If you have done the above steps and nothing happens when you run it, you may need to give it executable permissions. In Terminal, navigate to where the script is and use the command `chmod +x build_rpcs3.sh`. <br>
 
 Note that the script will perform all actions in the same folder you run it from (likely your `Downloads` folder), so you may need to give it permission to do so.
 
