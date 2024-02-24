@@ -57,5 +57,4 @@ Before trying to run a game, always look up the [RPCS3 Compatibility list](https
 
 The script adds several workarounds for build issues. <br> These should be removed over time as the core issues get resolved. Issues include: 
 - Build failure if `glslang` or `cubeb` are installed in homebrew
-- Build failure due to old-style-casts
 - Possible crash on launch relating to `libfreetype.dylib` (Fixed)
