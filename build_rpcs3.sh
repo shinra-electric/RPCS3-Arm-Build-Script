@@ -75,6 +75,9 @@ export LLVM_DIR=$(brew --prefix)/opt/llvm@17
 git clone https://github.com/RPCS3/rpcs3
 cd rpcs3
 
+# Change bundle identifier to be unique
+sed -i -e 's/net.rpcs3.rpcs3/net.rpcs3.rpcs3-arm/' ./rpcs3/rpcs3.plist.in
+
 # Update only the submodules that are needed
 git submodule update --init ./3rdparty/asmjit
 git submodule update --init ./3rdparty/cubeb
