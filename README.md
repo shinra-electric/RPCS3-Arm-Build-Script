@@ -1,3 +1,5 @@
+<img src="./RPCS3-Arm.png" width="200" align="right" />
+
 # Build Script for RPCS3 - Arm
 
 This script will compile an Arm64 build of the PlayStation 3 Emulator RPCS3 for modern M-Series Macs. 
