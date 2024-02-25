@@ -125,6 +125,9 @@ cmake .. -DUSE_ALSA=OFF \
 # Build
 ninja 
 
+# Get an icon from macosicons.com
+curl -o bin/rpcs3.app/Contents/Resources/rpcs3.icns https://parsefiles.back4app.com/JPaQcFfEEQ1ePBxbf6wvzkPMEqKYHhPYv8boI1Rc/ae136945718671fffd7989eb3ac276ee_RPCS3-Arm.icns
+
 # Codesign
 codesign --force --deep --sign - bin/rpcs3.app/Contents/MacOS/rpcs3
 
