@@ -1,6 +1,6 @@
-<img src="./RPCS3-Arm.png" width="200" align="right" />
-
 # Build Script for RPCS3 - Arm
+
+<img src="./RPCS3-Arm.png" width="200" align="right" />
 
 This script will compile an Arm64 build of the PlayStation 3 Emulator RPCS3 for modern M-Series Macs. 
 
@@ -58,5 +58,5 @@ Before trying to run a game, always look up the [RPCS3 Compatibility list](https
 ## Known issues
 
 The script adds several workarounds for build issues. <br> These should be removed over time as the core issues get resolved. Issues include: 
-- Build failure if `glslang` or `cubeb` are installed in homebrew
+- Build failure if `cubeb` is installed in homebrew
 - Possible crash on launch relating to `libfreetype.dylib` (Fixed)
