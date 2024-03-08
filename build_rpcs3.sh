@@ -39,18 +39,15 @@ do
 	brew_dependency_check $dep
 done
 
-# Make sure glslang and cubeb(macOS 14) are uninstalled, otherwise building will fail
+# Make sure cubeb(macOS 14) is uninstalled, otherwise building will fail
 # Will reinstall at the end of the script
-reinstall_glslang=false
 reinstall_cubeb=false
 
 brew_remove() {
 	echo -e "${PURPLE}Checking for $1 installation...${NC}"
 	if [ -d "$(brew --prefix)/opt/$1" ]; then
 		brew rm $1 && echo -e "${GREEN}Removing $1${NC}"
-		if [ "$1" = "glslang" ]; then 
-			reinstall_glslang=true
-		elif [ "$1" = cubeb ]; then
+		if [ "$1" = cubeb ]; then
 			reinstall_cubeb=true
 		fi
 	else
@@ -58,7 +55,6 @@ brew_remove() {
 	fi
 }
 
-brew_remove glslang
 brew_remove cubeb
 
 # Set variables
@@ -144,12 +140,7 @@ if [ $? -eq 0 ]; then
 	rm -rf rpcs3
 fi 
 
-# Reinstall glslang or cubeb if they were originally installed
-if [ $reinstall_glslang = true ]; then
-	echo -e "${PURPLE}Reinstalling glslang${NC}" 
-	brew install glslang
-fi
-
+# Reinstall cubeb if it was originally installed
 if [ $reinstall_cubeb = true ]; then
 	echo -e "${PURPLE}Reinstalling cubeb${NC}"
 	brew install cubeb
