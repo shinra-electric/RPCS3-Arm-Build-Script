@@ -36,12 +36,12 @@ It will perform the following actions:
 - Check if Homebrew is installed, and install it if it isn't. 
 - Homebrew requires the Xcode command-line tools to be installed, so it will request that.
 - Check if the required Homebrew dependencies are installed. Update if they are, install if not.
-- Check if `glslang` and `cubeb` are installed. Remove if present. 
+- Check if `cubeb` is installed. Remove if present. 
 - Clone the Github repository source code and build the app bundle
 - Codesign the app bundle to run locally
 - The app bundle will be called `RPCS3-Arm.app` and it will replace any older build with the same name in the same folder. 
 - Delete the source folder
-- Reinstall `glslang` or `cubeb` if they were already present and removed earlier.
+- Reinstall `cubeb` if it was already present and removed earlier.
 
 ## Setting up the emulator
 
