@@ -67,38 +67,57 @@ fi
 export VK_ICD_FILENAMES=$VULKAN_SDK/share/vulkan/icd.d/MoltenVK_icd.json
 export LLVM_DIR=$(brew --prefix)/opt/llvm@17
 
-# Update Repository
-git clone https://github.com/RPCS3/rpcs3
-cd rpcs3
+# Check to see if the source folder exists
+if [ ! -d "rpcs3" ]; then
+	git clone https://github.com/RPCS3/rpcs3
+	cd rpcs3
+	
+	# Change bundle identifier to be unique
+	sed -i -e 's/net.rpcs3.rpcs3/net.rpcs3.rpcs3-arm/' ./rpcs3/rpcs3.plist.in
+	
+	# Fix hidapi
+	sed -i '' "s/extern const double NSAppKitVersionNumber;/const double NSAppKitVersionNumber = 1343;/g" 3rdparty/hidapi/hidapi/mac/hid.c
+else
+	echo "RPCS3 repository already exists. Updating..."
+	cd rpcs3
+	rm -rf build
+	git pull origin master
+fi
 
-# Change bundle identifier to be unique
-sed -i -e 's/net.rpcs3.rpcs3/net.rpcs3.rpcs3-arm/' ./rpcs3/rpcs3.plist.in
+# Update submodules
+echo -e "${PURPLE}Updating submodules...${NC}"
+git_update_submodule() {
+	git submodule update --init ./3rdparty/$1
+}
+
+submodules=( asmjit \
+			cubeb \
+			curl \
+			flatbuffers \
+			glslang \
+			GPUOpen \
+			hidapi \
+			libusb \
+			miniupnp \
+			pine \
+			pugixml \
+			rtmidi \
+			SoundTouch \
+			SPIRV \
+			stblib \
+			wolfssl \
+			xxHash \
+			yaml-cpp \
+			# libpng
+			# llvm
+			# FAudio
+			)
 
 # Update only the submodules that are needed
-git submodule update --init ./3rdparty/asmjit
-git submodule update --init ./3rdparty/cubeb
-git submodule update --init ./3rdparty/curl
-git submodule update --init ./3rdparty/flatbuffers
-git submodule update --init ./3rdparty/glslang
-git submodule update --init ./3rdparty/GPUOpen
-git submodule update --init ./3rdparty/hidapi
-git submodule update --init ./3rdparty/libusb
-git submodule update --init ./3rdparty/miniupnp
-git submodule update --init ./3rdparty/pine
-git submodule update --init ./3rdparty/pugixml
-git submodule update --init ./3rdparty/rtmidi
-git submodule update --init ./3rdparty/SoundTouch
-git submodule update --init ./3rdparty/SPIRV
-git submodule update --init ./3rdparty/stblib
-git submodule update --init ./3rdparty/wolfssl
-git submodule update --init ./3rdparty/xxHash
-git submodule update --init ./3rdparty/yaml-cpp
-#git submodule update --init ./3rdparty/libpng
-#git submodule update --init ./3rdparty/llvm
-#git submodule update --init ./3rdparty/FAudio
-
-# Fix hidapi
-sed -i '' "s/extern const double NSAppKitVersionNumber;/const double NSAppKitVersionNumber = 1343;/g" 3rdparty/hidapi/hidapi/mac/hid.c
+for module in $submodules[@]
+do 
+	git_update_submodule $module
+done
 
 # Configure build system
 mkdir build && cd build
