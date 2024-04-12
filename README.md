@@ -59,6 +59,6 @@ Before trying to run a game, always look up the [RPCS3 Compatibility list](https
 
 ## Known issues
 
-The script adds several workarounds for build issues. <br> These should be removed over time as the core issues get resolved. Issues include: 
+These are issues with the script or with building for Arm in general.<br>They should be removed over time as the core issues get resolved. Issues include: 
 - Build failure if `cubeb` is installed in homebrew
 - Qt Frameworks are not bundled, so the app is not portable
