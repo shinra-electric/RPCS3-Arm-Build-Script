@@ -139,6 +139,12 @@ cmake .. -GNinja \
 # Build
 ninja 
 
+# Check whether the build was successful
+if [ $? -ne 0 ]; then
+	echo -e "${RED}Building failed${NC}"
+	exit 1
+fi 
+
 # Get an icon from macosicons.com
 curl -o bin/rpcs3.app/Contents/Resources/rpcs3.icns https://parsefiles.back4app.com/JPaQcFfEEQ1ePBxbf6wvzkPMEqKYHhPYv8boI1Rc/ae136945718671fffd7989eb3ac276ee_RPCS3-Arm.icns
 
