@@ -75,6 +75,10 @@ if [ ! -d "rpcs3" ]; then
 	# Change bundle identifier to be unique
 	sed -i -e 's/net.rpcs3.rpcs3/net.rpcs3.rpcs3-arm/' ./rpcs3/rpcs3.plist.in
 	
+	# Fix variable name to fix ffmpeg issue
+	# Remove in the future when fixed
+	sed -i -e 's/frame_number/frame_num/' ./rpcs3/util/media_utils.cpp
+	
 	# Fix hidapi
 	sed -i '' "s/extern const double NSAppKitVersionNumber;/const double NSAppKitVersionNumber = 1343;/g" 3rdparty/hidapi/hidapi/mac/hid.c
 else
