@@ -99,16 +99,16 @@ submodules=( asmjit \
 			curl \
 			flatbuffers \
 			glslang \
-			GPUOpen \
+			# GPUOpen \
 			hidapi \
 			libusb \
 			miniupnp \
-			pine \
+			# pine \
 			pugixml \
 			rtmidi \
 			SoundTouch \
 			SPIRV \
-			stblib \
+			# stblib \
 			wolfssl \
 			xxHash \
 			yaml-cpp \
