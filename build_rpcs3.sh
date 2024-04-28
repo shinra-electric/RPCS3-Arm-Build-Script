@@ -6,6 +6,9 @@ GREEN='\033[0;32m'
 RED='\033[0;31m'
 NC='\033[0m' # No Color
 
+# Detect CPU architecture
+ARCH_NAME="$(uname -m)"
+
 # This gets the location that the script is being run from and moves there.
 SCRIPT_DIR=${0:a:h}
 cd "$SCRIPT_DIR"
@@ -14,6 +17,20 @@ cd "$SCRIPT_DIR"
 if ! command -v brew &> /dev/null; then
 	echo -e "${PURPLE}Homebrew not found. Installing Homebrew...${NC}"
 	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	if [[ "${ARCH_NAME}" == "arm64" ]]; then 
+		(echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> $HOME/.zprofile
+		eval "$(/opt/homebrew/bin/brew shellenv)"
+		else 
+		(echo; echo 'eval "$(/user/local/bin/brew shellenv)"') >> $HOME/.zprofile
+		eval "$(/user/local/bin/brew shellenv)"
+	fi
+	
+	# Check for errors
+	if [ $? -ne 0 ]; then
+		echo "${RED}There was an issue installing Homebrew${NC}"
+		echo "${PURPLE}Quitting script...${NC}"	
+		exit 1
+	fi
 else
 	echo -e "${PURPLE}Homebrew found. Updating Homebrew...${NC}"
 	brew update
@@ -32,7 +49,7 @@ brew_dependency_check() {
 	fi
 }
 
-deps=( cmake ffmpeg glew libusb llvm@17 molten-vk nasm ninja pkg-config qt@6 sdl2 vulkan-headers )
+deps=( cmake ffmpeg glew libusb llvm molten-vk nasm ninja pkg-config qt@6 sdl2 vulkan-headers )
 
 for dep in $deps[@]
 do 
@@ -65,7 +82,7 @@ if [ ! -h "$VULKAN_SDK/lib/libvulkan.dylib" ]; then
 	ln -s "$VULKAN_SDK/lib/libMoltenVK.dylib" "$VULKAN_SDK/lib/libvulkan.dylib"
 fi 
 export VK_ICD_FILENAMES=$VULKAN_SDK/share/vulkan/icd.d/MoltenVK_icd.json
-export LLVM_DIR=$(brew --prefix)/opt/llvm@17
+export LLVM_DIR=$(brew --prefix)/opt/llvm
 
 # Check to see if the source folder exists
 if [ ! -d "rpcs3" ]; then
@@ -78,9 +95,7 @@ if [ ! -d "rpcs3" ]; then
 	# Fix variable name to fix ffmpeg issue
 	# Remove in the future when fixed
 	sed -i -e 's/frame_number/frame_num/' ./rpcs3/util/media_utils.cpp
-	
-	# Fix hidapi
-	sed -i '' "s/extern const double NSAppKitVersionNumber;/const double NSAppKitVersionNumber = 1343;/g" 3rdparty/hidapi/hidapi/mac/hid.c
+
 else
 	echo "RPCS3 repository already exists. Updating..."
 	cd rpcs3
@@ -123,10 +138,11 @@ do
 	git_update_submodule $module
 done
 
-# Configure build system
-mkdir build && cd build
+# Fix hidapi
+sed -i '' "s/extern const double NSAppKitVersionNumber;/const double NSAppKitVersionNumber = 1343;/g" 3rdparty/hidapi/hidapi/mac/hid.c
 
-cmake .. -GNinja \
+# Configure build system
+cmake . -B build -GNinja \
 	-DUSE_ALSA=OFF \
 	-DUSE_PULSE=OFF \
 	-DUSE_AUDIOUNIT=ON \
@@ -141,7 +157,7 @@ cmake .. -GNinja \
 	-Wno-deprecated
 
 # Build
-ninja 
+ninja -C build
 
 # Check whether the build was successful
 if [ $? -ne 0 ]; then
@@ -150,10 +166,10 @@ if [ $? -ne 0 ]; then
 fi 
 
 # Get an icon from macosicons.com
-curl -o bin/rpcs3.app/Contents/Resources/rpcs3.icns https://parsefiles.back4app.com/JPaQcFfEEQ1ePBxbf6wvzkPMEqKYHhPYv8boI1Rc/ae136945718671fffd7989eb3ac276ee_RPCS3-Arm.icns
+curl -o build/bin/rpcs3.app/Contents/Resources/rpcs3.icns https://parsefiles.back4app.com/JPaQcFfEEQ1ePBxbf6wvzkPMEqKYHhPYv8boI1Rc/ae136945718671fffd7989eb3ac276ee_RPCS3-Arm.icns
 
 # Codesign
-codesign --force --deep --sign - bin/rpcs3.app/Contents/MacOS/rpcs3
+codesign --force --deep --sign - build/bin/rpcs3.app/Contents/MacOS/rpcs3
 
 # Check that the build was successful
 if [ $? -eq 0 ]; then
