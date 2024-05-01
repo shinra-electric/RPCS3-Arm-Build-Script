@@ -21,8 +21,8 @@ if ! command -v brew &> /dev/null; then
 		(echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> $HOME/.zprofile
 		eval "$(/opt/homebrew/bin/brew shellenv)"
 		else 
-		(echo; echo 'eval "$(/user/local/bin/brew shellenv)"') >> $HOME/.zprofile
-		eval "$(/user/local/bin/brew shellenv)"
+		(echo; echo 'eval "$(/usr/local/bin/brew shellenv)"') >> $HOME/.zprofile
+		eval "$(/usr/local/bin/brew shellenv)"
 	fi
 	
 	# Check for errors
