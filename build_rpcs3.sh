@@ -6,12 +6,14 @@ GREEN='\033[0;32m'
 RED='\033[0;31m'
 NC='\033[0m' # No Color
 
-# Detect CPU architecture
-ARCH_NAME="$(uname -m)"
-
 # This gets the location that the script is being run from and moves there.
 SCRIPT_DIR=${0:a:h}
 cd "$SCRIPT_DIR"
+
+if [[ $(uname -m) == "x86_64" ]]; then 
+	echo "\n${RED}This script can't be run on an Intel Mac${NC}\n"
+	exit 0
+fi
 
 # Check if Homebrew is installed
 if ! command -v brew &> /dev/null; then
