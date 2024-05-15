@@ -129,6 +129,7 @@ submodules=( asmjit \
 			wolfssl \
 			xxHash \
 			yaml-cpp \
+			zstd \
 			# libpng
 			# llvm
 			# FAudio
