@@ -120,12 +120,13 @@ submodules=( asmjit \
 			hidapi \
 			libusb \
 			miniupnp \
+			OpenAL \
 			# pine \
 			pugixml \
 			rtmidi \
 			SoundTouch \
 			SPIRV \
-			# stblib \
+			stblib \
 			wolfssl \
 			xxHash \
 			yaml-cpp \
