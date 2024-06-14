@@ -170,7 +170,7 @@ if [ $? -ne 0 ]; then
 fi 
 
 # Get an icon from macosicons.com
-curl -o build/bin/rpcs3.app/Contents/Resources/rpcs3.icns https://parsefiles.back4app.com/JPaQcFfEEQ1ePBxbf6wvzkPMEqKYHhPYv8boI1Rc/ae136945718671fffd7989eb3ac276ee_RPCS3-Arm.icns
+curl -o build/bin/rpcs3.app/Contents/Resources/rpcs3.icns https://parsefiles.back4app.com/JPaQcFfEEQ1ePBxbf6wvzkPMEqKYHhPYv8boI1Rc/8cfaf8a5f5d112be82708d9baf62e74e_RPCS3-Arm.icns
 
 # Codesign
 codesign --force --deep --sign - build/bin/rpcs3.app/Contents/MacOS/rpcs3
