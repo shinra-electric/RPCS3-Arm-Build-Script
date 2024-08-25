@@ -44,7 +44,7 @@ In the `CPU` tab in the settings:
 Before trying to run a game, always look up the [RPCS3 Compatibility list](https://rpcs3.net/compatibility) to check the recommended settings. Settings can be saved on a per-game basis by right-clicking a game and creating a new custom configuration from global settings.
 
 > [!Note]
-> When trying to play the Ratchet & Clank 1-3 series, in the Settings `Advanced` tab the `Disable MSL Fast Math` option should be selected to prevent graphical corruption. <br>This is not mentioned on the compatibility page.
+> If you experience graphical corruption in some games, try toggling the `Disable MSL Fast Math` option in the settings `Advanced` tab . <br>This is a macOS specific option that fixes several games but is often not mentioned on the compatibility pages.
 
 ## Known issues
 
