@@ -9,17 +9,6 @@ This script will compile an Arm64 build of the PlayStation 3 Emulator RPCS3 for 
 > The Arm build of RPCS3 can only run a few games. <br>
 > If you would like to play games, then download the official x64 build [here](https://rpcs3.net/download) and run through Rosetta.
 
-> [!NOTE]
-> Only a short list of games have been confirmed to run on Arm, including:
-> 
-> - The Arkedo series
-> - Odin Sphere Leifthrasir
-> - Dragon's Crown (Issue with characters in shadow)
-> - Ryu Ga Gotoku 1 & 2 HD Remaster (Released in Japan only)
-> - Ratchet & Clank 1-2-3 HD Remasters (Slowdowns, broken cutscenes)<br>
->
-> If you find another game that works, please mention it and I'll add to the list.
-
 ## Running the script
 
 When downloaded, you probably won't be able to run the script at first.<br>
