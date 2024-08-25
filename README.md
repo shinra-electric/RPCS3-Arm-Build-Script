@@ -6,8 +6,8 @@ This script will compile an Arm64 build of the PlayStation 3 Emulator RPCS3 for 
 
 > [!WARNING]
 > The script is provided for experimentation purposes only. <br>
-> The Arm build of RPCS3 can only run a few games. <br>
-> If you would like to play games, then download the official x64 build [here](https://rpcs3.net/download) and run through Rosetta.
+> LLVM does not work on the Arm builds, so performane will be slow. <br>
+> If you would like to play games, download the official x64 build [here](https://rpcs3.net/download) and run through Rosetta.
 
 ## Running the script
 

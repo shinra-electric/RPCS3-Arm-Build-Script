@@ -131,6 +131,7 @@ submodules=( asmjit \
 			xxHash \
 			yaml-cpp \
 			zstd \
+			7zip \
 			# libpng
 			# llvm
 			# FAudio
