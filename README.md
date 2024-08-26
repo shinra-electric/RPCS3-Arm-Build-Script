@@ -17,11 +17,11 @@ When downloaded, you probably won't be able to run the script at first.<br>
 
 - The default application that is used to open the script might be set to a text editor. Change the default application by selecting the script and using `Command+I` to open the `Get Info` window (or right-click and select from the context menu). Under the `Open With:` section, if Terminal is not selected choose `Other`, enable `All Applications` and navigate to `/Applications/Utilities/Terminal`. It should now open by double-clicking it.<br>
 
-- The script was written for the `Zsh` shell environment. If run from the command line, use `zsh build_rpcs3.sh`. The script will not run using `sh build_rpcs3.sh`.
+- The script was written for the `Zsh` shell environment. If run from the command line, use `zsh build_rpcs3.sh`. The script will not work properly using `sh build_rpcs3.sh`.
 
 - If you have done the above steps and nothing happens when you run it, you may need to give it executable permissions. In Terminal, use the `cd` command to navigate to where the script is and enter `chmod +x build_rpcs3.sh`. <br>
 
-Note that the script will perform all actions in the same folder you run it from (likely your `Downloads` folder), so you may need to give it permission to do so.
+Note that the script will perform all actions in the same folder you run it from (likely your `Downloads` folder), so you may need to give it permission for this, or move it somewhere else.
 
 It will perform the following actions: 
 - Check if Homebrew is installed, and install it if it isn't. 
@@ -35,6 +35,8 @@ It will perform the following actions:
 - Reinstall `cubeb` if it was already present and removed earlier.
 
 ## Setting up the emulator
+
+Refer to the RPCS3 [Quickstart Guide](https://rpcs3.net/quickstart) if you are running it for the first time. 
 
 Before trying to run a game, always look up the [RPCS3 Compatibility list](https://rpcs3.net/compatibility) to check the recommended settings. Settings can be saved on a per-game basis by right-clicking a game and creating a new custom configuration from global settings.
 
