@@ -6,7 +6,7 @@ This script will compile an Arm64 build of the PlayStation 3 Emulator RPCS3 for 
 
 > [!WARNING]
 > The script is provided for experimentation purposes only. <br>
-> LLVM does not work on the Arm builds, so performance will be slow. <br>
+> The LLVM recompiler is currently experimental. <br>
 > If you would like to play games, download the official x64 build [here](https://rpcs3.net/download) and run through Rosetta.
 
 ## Running the script
@@ -35,11 +35,6 @@ It will perform the following actions:
 - Reinstall `cubeb` if it was already present and removed earlier.
 
 ## Setting up the emulator
-
-The fast LLVM recompiler currently does not work, so the slower interpreter must be used.<br>
-In the `CPU` tab in the settings: 
-- Change the PPU Decoder to Interpreter (static)
-- Change the SPU Decoder to Interpreter (dynamic)
 
 Before trying to run a game, always look up the [RPCS3 Compatibility list](https://rpcs3.net/compatibility) to check the recommended settings. Settings can be saved on a per-game basis by right-clicking a game and creating a new custom configuration from global settings.
 
