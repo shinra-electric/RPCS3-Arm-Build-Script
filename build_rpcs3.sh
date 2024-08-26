@@ -86,65 +86,74 @@ fi
 export VK_ICD_FILENAMES=$VULKAN_SDK/share/vulkan/icd.d/MoltenVK_icd.json
 export LLVM_DIR=$(brew --prefix)/opt/llvm
 
+# Update individual submodule
+git_update_submodule() {
+	echo -e "${PURPLE}Updating $1...${NC}"
+	git submodule update --init --recursive ./3rdparty/$1
+}
+
+# Update submodules 
+git_update_submodules() {
+	echo -e "${PURPLE}Updating submodules...${NC}"
+	# Update only the submodules that are needed
+	submodules=( 7zip \
+				asmjit \
+				cubeb \
+				curl \
+				flatbuffers \
+				glslang \
+				hidapi \
+				libusb \
+				miniupnp \
+				OpenAL \
+				pugixml \
+				rtmidi \
+				SoundTouch \
+				SPIRV \
+				stblib \
+				wolfssl \
+				xxHash \
+				yaml-cpp \
+				zstd \
+				# GPUOpen \
+				# pine \
+				# libpng
+				# llvm
+				# FAudio
+				)
+	
+	for module in $submodules[@]
+	do 
+		git_update_submodule $module
+	done
+}
+
 # Check to see if the source folder exists
 if [ ! -d "rpcs3" ]; then
+	echo "${PURPLE}Cloning RPCS3 Repository...${NC}"
 	git clone https://github.com/RPCS3/rpcs3
 	cd rpcs3
-	
+	git_update_submodules
+
 	# Change bundle identifier to be unique
+	echo "${PURPLE}Changing bundle identifier to be unique...${NC}"
 	sed -i -e 's/net.rpcs3.rpcs3/net.rpcs3.rpcs3-arm/' ./rpcs3/rpcs3.plist.in
 	
-	# Fix variable name to fix ffmpeg issue
+	# Change variable name to fix ffmpeg issue
 	# Remove in the future when fixed
+	echo "${PURPLE}Applying FFMPEG workaround...${NC}"
 	sed -i -e 's/frame_number/frame_num/' ./rpcs3/util/media_utils.cpp
-
+	
+	# Fix hidapi
+	echo "${PURPLE}Applying HIDAPI workaround...${NC}"
+	sed -i '' "s/extern const double NSAppKitVersionNumber;/const double NSAppKitVersionNumber = 1343;/g" 3rdparty/hidapi/hidapi/mac/hid.c
+	
 else
-	echo "RPCS3 repository already exists. Updating..."
+	echo "${PURPLE}RPCS3 repository already exists${NC}"
 	cd rpcs3
 	rm -rf build
 	git pull origin master
 fi
-
-# Update submodules
-echo -e "${PURPLE}Updating submodules...${NC}"
-git_update_submodule() {
-	git submodule update --init ./3rdparty/$1
-}
-
-submodules=( asmjit \
-			cubeb \
-			curl \
-			flatbuffers \
-			glslang \
-			# GPUOpen \
-			hidapi \
-			libusb \
-			miniupnp \
-			OpenAL \
-			# pine \
-			pugixml \
-			rtmidi \
-			SoundTouch \
-			SPIRV \
-			stblib \
-			wolfssl \
-			xxHash \
-			yaml-cpp \
-			zstd \
-			7zip \
-			# libpng
-			# llvm
-			# FAudio
-			)
-
-# Update only the submodules that are needed
-for module in $submodules[@]
-do 
-	git_update_submodule $module
-done
-
-# Fix hidapi
-sed -i '' "s/extern const double NSAppKitVersionNumber;/const double NSAppKitVersionNumber = 1343;/g" 3rdparty/hidapi/hidapi/mac/hid.c
 
 # Configure build system
 cmake . -B build -GNinja \
