@@ -51,7 +51,7 @@ brew_dependency_check() {
 	fi
 }
 
-deps=( cmake ffmpeg glew libusb llvm molten-vk nasm ninja pkg-config qt@6 sdl2 vulkan-headers )
+deps=( cmake ffmpeg glew libpng libusb llvm molten-vk nasm ninja pkg-config qt@6 sdl2 vulkan-headers )
 
 for dep in $deps[@]
 do 
