@@ -4,16 +4,16 @@ on: [push, workflow_dispatch]
 
 jobs:
   build:
-	runs-on: macos-latest
+    runs-on: macos-latest
 
-	steps:
-	- uses: actions/checkout@main
-	- name: Build
-	  run: ./build_rpcs3.sh
-	  
-	- name: Upload a Build Artifact
-	  uses: actions/upload-artifact@v4.3.5
-	  with:
-		name: RPCS3-Arm
-		path: ./rpcs3/build/bin/
+    steps:
+    - uses: actions/checkout@main
+    - name: Build
+      run: ./build_rpcs3.sh
+
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v4.3.5
+      with:
+        name: RPCS3-Arm
+        path: ./rpcs3/build/bin/
 			  
