@@ -8,7 +8,7 @@ cd "$SCRIPT_DIR"
 # Install required dependencies
 export HOMEBREW_NO_AUTO_UPDATE=1
 export HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK=1
-brew install ffmpeg glew llvm nasm pipenv sdl2 vulkan-headers 
+brew install ffmpeg glew libpng llvm nasm pipenv sdl2 vulkan-headers 
 curl -L https://raw.githubusercontent.com/Homebrew/homebrew-core/0d9f25fbd1658e975d00bd0e8cccd20a0c2cb74b/Formula/m/molten-vk.rb > molten-vk.rb && brew install --formula molten-vk.rb
 
 # Get Qt
