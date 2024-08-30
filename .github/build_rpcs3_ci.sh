@@ -8,7 +8,7 @@ cd "$SCRIPT_DIR"
 # Install required dependencies
 export HOMEBREW_NO_AUTO_UPDATE=1
 export HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK=1
-brew install ffmpeg glew libpng llvm nasm pipenv sdl2 vulkan-headers 
+brew install ffmpeg glew llvm nasm pipenv sdl2 vulkan-headers 
 curl -L https://raw.githubusercontent.com/Homebrew/homebrew-core/0d9f25fbd1658e975d00bd0e8cccd20a0c2cb74b/Formula/m/molten-vk.rb > molten-vk.rb && brew install --formula molten-vk.rb
 
 # Get Qt
@@ -42,7 +42,7 @@ export LLVM_DIR=$(brew --prefix)/opt/llvm
 
 git clone https://github.com/rpcs3/rpcs3
 cd rpcs3
-git submodule -q update --init --depth=1 --jobs=8 $(awk '/path/ && !/GPUOpen/ && !/llvm/ && !/FAudio/ && !/libpng/ { print $3 }' .gitmodules)
+git submodule -q update --init --depth=1 --jobs=8 $(awk '/path/ && !/GPUOpen/ && !/llvm/ && !/FAudio/ { print $3 }' .gitmodules)
 
 # Fixes
 # Change bundle identifier to be unique
