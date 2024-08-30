@@ -9,7 +9,7 @@ jobs:
     steps:
     - uses: actions/checkout@main
     - name: Build
-      run: ./build_rpcs3.sh
+      run: ./.github/build_rpcs3_ci.sh
 
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v4.3.5
