@@ -74,12 +74,12 @@ cmake . -B build \
 	-DUSE_SYSTEM_LIBPNG=ON 
 	
 # Build
-cmake --build build/ --parallel 3
+ninja -C build
 
 mkdir ./build/bin/rpcs3.app/Contents/lib
-ditto "/opt/homebrew/opt/llvm@16/lib/c++/libc++abi.1.0.dylib" "./build/bin/rpcs3.app/Contents/lib/libc++abi.1.dylib"
-ditto "$(realpath /opt/homebrew/lib/libsharpyuv.0.dylib)" "./build/bin/rpcs3.app/Contents/lib/libsharpyuv.0.dylib"
-ditto "$(realpath /opt/homebrew/lib/libintl.8.dylib)" "./build/bin/rpcs3.app/Contents/lib/libintl.8.dylib"
+ditto "/opt/homebrew/opt/llvm/lib/c++/libc++abi.1.0.dylib" "build/bin/rpcs3.app/Contents/lib/libc++abi.1.dylib"
+ditto "$(realpath /opt/homebrew/lib/libsharpyuv.0.dylib)" "build/bin/rpcs3.app/Contents/lib/libsharpyuv.0.dylib"
+ditto "$(realpath /opt/homebrew/lib/libintl.8.dylib)" "build/bin/rpcs3.app/Contents/lib/libintl.8.dylib"
 	
 # Remove unused Qt frameworks
 rm -rf "build/bin/rpcs3.app/Contents/Frameworks/QtPdf.framework" \
@@ -93,16 +93,16 @@ rm -rf "build/bin/rpcs3.app/Contents/Frameworks/QtPdf.framework" \
 
 # Make an icon
 mkdir rpcs3.iconset
-sips -z 16 16     ./RCPS3-Arm.png --out rpcs3.iconset/icon_16x16.png
-sips -z 32 32     ./RCPS3-Arm.png --out rpcs3.iconset/icon_16x16@2x.png
-sips -z 128 128   ./RCPS3-Arm.png --out rpcs3.iconset/icon_128x128.png
-sips -z 256 256   ./RCPS3-Arm.png --out rpcs3.iconset/icon_128x128@2x.png
-sips -z 512 512   ./RCPS3-Arm.png --out rpcs3.iconset/icon_512x512.png
-cp ./RCPS3-Arm.png rpcs3.iconset/icon_512x512@2x.png
+sips -z 16 16     ../../RCPS3-Arm.png --out rpcs3.iconset/icon_16x16.png
+sips -z 32 32     ../../RCPS3-Arm.png --out rpcs3.iconset/icon_16x16@2x.png
+sips -z 128 128   ../../RCPS3-Arm.png --out rpcs3.iconset/icon_128x128.png
+sips -z 256 256   ../../RCPS3-Arm.png --out rpcs3.iconset/icon_128x128@2x.png
+sips -z 512 512   ../../RCPS3-Arm.png --out rpcs3.iconset/icon_512x512.png
+cp ../../RCPS3-Arm.png rpcs3.iconset/icon_512x512@2x.png
 iconutil -c icns rpcs3.iconset
 rm -R rpcs3.iconset
 
-cp -R ./rpcs3.icns ./rpcs3/build/bin/rpcs3.app/Contents/Resources/rpcs3.icns
+cp -R rpcs3.icns build/bin/rpcs3.app/Contents/Resources/rpcs3.icns
 
 # Rename the app so it doesn't clash with the x86 build
 mv /rpcs3/build/bin/rpcs3.app /rpcs3/build/bin/RPCS3-Arm.app
