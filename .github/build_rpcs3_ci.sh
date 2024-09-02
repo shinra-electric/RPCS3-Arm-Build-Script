@@ -9,6 +9,7 @@ cd "$SCRIPT_DIR"
 export HOMEBREW_NO_AUTO_UPDATE=1
 export HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK=1
 brew install ffmpeg glew llvm nasm ninja pipenv sdl2 vulkan-headers 
+brew upgrade libpng
 curl -L https://raw.githubusercontent.com/Homebrew/homebrew-core/0d9f25fbd1658e975d00bd0e8cccd20a0c2cb74b/Formula/m/molten-vk.rb > molten-vk.rb && brew install --formula molten-vk.rb
 
 # Get Qt
@@ -76,7 +77,7 @@ cmake . -B build \
 # Build
 ninja -C build
 
-mkdir ./build/bin/rpcs3.app/Contents/lib
+mkdir build/bin/rpcs3.app/Contents/lib
 ditto "/opt/homebrew/opt/llvm/lib/c++/libc++abi.1.0.dylib" "build/bin/rpcs3.app/Contents/lib/libc++abi.1.dylib"
 ditto "$(realpath /opt/homebrew/lib/libsharpyuv.0.dylib)" "build/bin/rpcs3.app/Contents/lib/libsharpyuv.0.dylib"
 ditto "$(realpath /opt/homebrew/lib/libintl.8.dylib)" "build/bin/rpcs3.app/Contents/lib/libintl.8.dylib"
@@ -93,12 +94,12 @@ rm -rf "build/bin/rpcs3.app/Contents/Frameworks/QtPdf.framework" \
 
 # Make an icon
 mkdir rpcs3.iconset
-sips -z 16 16     ../../RCPS3-Arm.png --out rpcs3.iconset/icon_16x16.png
-sips -z 32 32     ../../RCPS3-Arm.png --out rpcs3.iconset/icon_16x16@2x.png
-sips -z 128 128   ../../RCPS3-Arm.png --out rpcs3.iconset/icon_128x128.png
-sips -z 256 256   ../../RCPS3-Arm.png --out rpcs3.iconset/icon_128x128@2x.png
-sips -z 512 512   ../../RCPS3-Arm.png --out rpcs3.iconset/icon_512x512.png
-cp ../../RCPS3-Arm.png rpcs3.iconset/icon_512x512@2x.png
+sips -z 16 16     ../RCPS3-Arm.png --out rpcs3.iconset/icon_16x16.png
+sips -z 32 32     ../RCPS3-Arm.png --out rpcs3.iconset/icon_16x16@2x.png
+sips -z 128 128   ../RCPS3-Arm.png --out rpcs3.iconset/icon_128x128.png
+sips -z 256 256   ../RCPS3-Arm.png --out rpcs3.iconset/icon_128x128@2x.png
+sips -z 512 512   ../RCPS3-Arm.png --out rpcs3.iconset/icon_512x512.png
+cp ../RCPS3-Arm.png rpcs3.iconset/icon_512x512@2x.png
 iconutil -c icns rpcs3.iconset
 rm -R rpcs3.iconset
 
