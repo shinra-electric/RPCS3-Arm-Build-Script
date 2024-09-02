@@ -151,6 +151,24 @@ else
 fi
 
 # Configure build system
+cmake . -B build \
+	-Wno-deprecated \
+	-GNinja \
+	-DUSE_NATIVE_INSTRUCTIONS=OFF \
+	-DCMAKE_OSX_ARCHITECTURES="arm64" \
+	-DLLVM_TARGETS_TO_BUILD="AArch64;ARM" \
+	-DBUILD_LLVM=OFF\
+	-DUSE_ALSA=OFF \
+	-DUSE_AUDIOUNIT=ON \
+	-DUSE_FAUDIO=OFF \
+	-DUSE_PULSE=OFF \
+	-DUSE_SDL=ON \
+	-DUSE_SYSTEM_SDL=ON \
+	-DUSE_SYSTEM_FFMPEG=on \
+	-DUSE_SYSTEM_MVK=on \
+	-DUSE_SYSTEM_LIBPNG=ON \
+
+# Configure build system
 cmake . -B build -GNinja \
 	-DUSE_ALSA=OFF \
 	-DUSE_PULSE=OFF \
