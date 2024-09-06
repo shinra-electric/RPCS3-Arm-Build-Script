@@ -36,7 +36,7 @@ It will perform the following actions:
 
 ## Setting up the emulator
 
-Refer to the RPCS3 [Quickstart Guide](https://rpcs3.net/quickstart) if you are running it for the first time. 
+Refer to the [Quickstart Guide](https://rpcs3.net/quickstart) if you are running RPCS3 for the first time. 
 
 Before trying to run a game, always look up the [RPCS3 Compatibility list](https://rpcs3.net/compatibility) to check the recommended settings. Settings can be saved on a per-game basis by right-clicking a game and creating a new custom configuration from global settings.
 
