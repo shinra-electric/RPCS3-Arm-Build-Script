@@ -86,6 +86,13 @@ fi
 export VK_ICD_FILENAMES=$VULKAN_SDK/share/vulkan/icd.d/MoltenVK_icd.json
 export LLVM_DIR=$(brew --prefix)/opt/llvm
 
+# Workaround for issues with SDL framework and non-standard OpenGL installs
+SEARCH_FRAMEWORKS_SEQUENCE=FIRST
+if [ -d /Library/Frameworks/SDL2.framework ]; then
+	echo "${PURPLE}Found SDL2.framework${NC}"
+	SEARCH_FRAMEWORKS_SEQUENCE=LAST
+fi
+
 # Update individual submodule
 git_update_submodule() {
 	echo -e "${PURPLE}Updating $1...${NC}"
