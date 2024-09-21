@@ -110,6 +110,7 @@ git_update_submodules() {
 				flatbuffers \
 				glslang \
 				hidapi \
+    				libpng \
 				libusb \
 				miniupnp \
 				OpenAL \
@@ -124,7 +125,6 @@ git_update_submodules() {
 				zstd \
 				# GPUOpen \
 				# pine \
-				# libpng
 				# llvm
 				# FAudio
 				)
@@ -173,7 +173,7 @@ cmake . -B build \
 	-DUSE_SYSTEM_SDL=ON \
 	-DUSE_SYSTEM_FFMPEG=on \
 	-DUSE_SYSTEM_MVK=on \
-	-DUSE_SYSTEM_LIBPNG=ON 
+	-DUSE_SYSTEM_LIBPNG=OFF
 
 # Build
 ninja -C build
