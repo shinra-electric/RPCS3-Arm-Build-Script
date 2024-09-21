@@ -208,3 +208,5 @@ if [ $reinstall_cubeb = true ]; then
 	echo -e "${PURPLE}Reinstalling cubeb${NC}"
 	brew install cubeb
 fi
+
+echo "${PURPLE}Script has completed${NC}"
