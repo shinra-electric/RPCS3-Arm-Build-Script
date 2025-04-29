@@ -104,29 +104,37 @@ git_update_submodules() {
 	echo -e "${PURPLE}Updating submodules...${NC}"
 	# Update only the submodules that are needed
 	submodules=( 7zip \
-				asmjit \
-				cubeb \
-				curl \
-				flatbuffers \
-				glslang \
-				hidapi \
-    				libpng \
-				libusb \
-				miniupnp \
-				OpenAL \
-				pugixml \
-				rtmidi \
-				SoundTouch \
-				SPIRV \
-				stblib \
-				wolfssl \
-				xxHash \
-				yaml-cpp \
-				zstd \
-				# GPUOpen \
-				# pine \
-				# llvm
-				# FAudio
+			asmjit \
+			# bcdec \
+			cubeb \
+			curl \
+			# discord-rpc \
+   			# FAudio \
+			flatbuffers \
+			fusion \
+			# GL \
+			glslang \
+			# GPUOpen \
+			hidapi \
+    			libpng \
+			# libsdl-org \
+			libusb \
+			# llvm \
+			miniupnp \
+			OpenAL \
+			opencv \
+			# pine \
+			pugixml \
+			rtmidi \
+			SoundTouch \
+			# SPIRV \
+			stblib \
+			wolfssl \
+			unordered_dense \
+			# xxHash \
+			yaml-cpp \
+			# zlib \
+			zstd \
 				)
 	
 	for module in $submodules[@]
@@ -159,6 +167,7 @@ fi
 
 # Configure build system
 cmake . -B build \
+	-DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
 	-Wno-deprecated \
 	-GNinja \
 	-DUSE_NATIVE_INSTRUCTIONS=OFF \
