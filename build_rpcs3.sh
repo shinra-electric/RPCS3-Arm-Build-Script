@@ -110,6 +110,7 @@ git_update_submodules() {
 			curl \
 			# discord-rpc \
    			# FAudio \
+      			# ffmpeg \
 			flatbuffers \
 			fusion \
 			# GL \
@@ -121,17 +122,16 @@ git_update_submodules() {
 			libusb \
 			# llvm \
 			miniupnp \
+   			# MoltenVK \
 			OpenAL \
 			opencv \
 			# pine \
 			pugixml \
 			rtmidi \
 			SoundTouch \
-			# SPIRV \
 			stblib \
-			wolfssl \
 			unordered_dense \
-			# xxHash \
+   			wolfssl \
 			yaml-cpp \
 			# zlib \
 			zstd \
