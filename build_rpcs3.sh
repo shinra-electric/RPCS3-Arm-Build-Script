@@ -105,7 +105,7 @@ git_update_submodules() {
 	# Update only the submodules that are needed
 	submodules=( 7zip \
 			asmjit \
-			# bcdec \
+			bcdec \
 			cubeb \
 			curl \
 			# discord-rpc \
