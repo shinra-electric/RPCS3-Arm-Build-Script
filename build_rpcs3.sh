@@ -115,7 +115,7 @@ git_update_submodules() {
 			fusion \
 			# GL \
 			glslang \
-			# GPUOpen \
+			GPUOpen \
 			hidapi \
     			libpng \
 			# libsdl-org \
