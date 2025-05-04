@@ -64,7 +64,7 @@ single_dependency_check() {
 dependencies_check() {
 	echo "${PURPLE}Checking for native Homebrew dependencies...${NC}"
 	# Required native Homebrew packages
-	deps=( cmake ffmpeg glew libpng libusb llvm molten-vk nasm ninja opencv pkg-config qt@6 sdl2 vulkan-headers )
+	deps=( cmake ffmpeg glew libpng libusb llvm molten-vk nasm ninja opencv pkg-config qt@6 sdl3 vulkan-headers )
 	
 	for dep in $deps[@]
 	do 
