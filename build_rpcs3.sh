@@ -283,11 +283,16 @@ continue_menu() {
 	PS3='Would you like to continue building? '
 	OPTIONS=(
 		"Continue"
+		"Checkout Commit"
 		"Quit")
 	select opt in $OPTIONS[@]
 	do
 		case $opt in
 			"Continue")
+				break
+				;;
+			"Checkout Commit")
+				checkout_commit_menu
 				break
 				;;
 			"Quit")
@@ -300,6 +305,12 @@ continue_menu() {
 				;;
 		esac
 	done
+}
+
+checkout_commit_menu() {
+	echo "\n${PURPLE}What commit would you like to checkout?${NC}"
+	commit_hash=$(printf '%s' 'Commit Hash: ' >&2; read x && printf '%s' "$x")
+	git checkout "$commit_hash"
 }
 
 cleanup_menu() {
