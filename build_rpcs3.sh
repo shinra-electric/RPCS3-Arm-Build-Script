@@ -28,7 +28,7 @@ introduction() {
 
 homebrew_check() {
 	if ! command -v brew &> /dev/null; then
-		echo -e "${PURPLE}Homebrew not found. Installing Homebrew...${NC}"
+		echo "${PURPLE}Homebrew not found. Installing Homebrew...${NC}"
 		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 		if [[ "${ARCH_NAME}" == "arm64" ]]; then 
 			(echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> $HOME/.zprofile
@@ -45,7 +45,7 @@ homebrew_check() {
 			exit 1
 		fi
 	else
-		echo -e "${PURPLE}Homebrew found. Updating Homebrew...${NC}"
+		echo  "${PURPLE}Homebrew found. Updating Homebrew...${NC}"
 		brew update
 	fi
 }
@@ -91,7 +91,7 @@ cubeb_check() {
 
 reinstall_cubeb() {
 	if [ $reinstall_cubeb = true ]; then
-		echo -e "${PURPLE}Reinstalling cubeb${NC}"
+		echo  "${PURPLE}Reinstalling cubeb${NC}"
 		brew install cubeb
 	fi
 }
@@ -176,7 +176,7 @@ build() {
 	export Qt6_DIR=$(brew --prefix)/opt/qt6
 	export VULKAN_SDK=$(brew --prefix)/opt/molten-vk
 	if [ ! -h "$VULKAN_SDK/lib/libvulkan.dylib" ]; then 
-		echo -e "${PURPLE}Creating libvulkan.dylib symlink${NC}"
+		echo  "${PURPLE}Creating libvulkan.dylib symlink${NC}"
 		ln -s "$VULKAN_SDK/lib/libMoltenVK.dylib" "$VULKAN_SDK/lib/libvulkan.dylib"
 	fi 
 	export VK_ICD_FILENAMES=$VULKAN_SDK/share/vulkan/icd.d/MoltenVK_icd.json
@@ -284,6 +284,7 @@ continue_menu() {
 	OPTIONS=(
 		"Continue"
 		"Checkout Commit"
+		"Checkout Pull Request"
 		"Quit")
 	select opt in $OPTIONS[@]
 	do
@@ -293,6 +294,10 @@ continue_menu() {
 				;;
 			"Checkout Commit")
 				checkout_commit_menu
+				break
+				;;
+			"Checkout Pull Request")
+				checkout_pr_menu
 				break
 				;;
 			"Quit")
@@ -311,6 +316,22 @@ checkout_commit_menu() {
 	echo "\n${PURPLE}What commit would you like to checkout?${NC}"
 	commit_hash=$(printf '%s' 'Commit Hash: ' >&2; read x && printf '%s' "$x")
 	git checkout "$commit_hash"
+	if [ $? -ne 0 ]; then
+		echo "\n${RED}Could not find the specified commit${NC}\n"
+		continue_menu
+	fi 
+}
+
+checkout_pr_menu() {
+	echo "\n${PURPLE}What pull request would you like to checkout?${NC}"
+	pr_id=$(printf '%s' 'Pull Request ID: ' >&2; read x && printf '%s' "$x")
+	branch_name=$(printf '%s' 'New Branch Name: ' >&2; read x && printf '%s' "$x")
+	git fetch origin pull/$pr_id/head:$branch_name
+	if [ $? -ne 0 ]; then
+		echo "\n${RED}Could not find the specified pull request${NC}\n"
+		continue_menu
+	fi 
+	git switch $branch_name
 }
 
 cleanup_menu() {
