@@ -2,11 +2,14 @@
 
 <img src="./RPCS3-Arm.png" width="200" align="right" />
 
-This script will compile an Arm64 build of the PlayStation 3 Emulator RPCS3 for modern M-Series Macs. 
+This script will compile an Arm64 build of the PlayStation 3 Emulator RPCS3 for modern M-Series Macs.<br>
+It also has these features: 
+- Can automatically install/update Homebrew dependencies (or skip the checks entirely)
+- Can check out a specified commit or Pull Request
+- Pauses so the source code can be edited before completing the build 
 
-> [!WARNING]
-> This script is no longer necessary, as RPCS3 has introduced their own Arm builds. <br>
-> Official builds are available [here](https://rpcs3.net/download).
+> [!NOTE]
+> Official builds of RPCS3 are available [here](https://rpcs3.net/download).
 
 ## Running the script
 
